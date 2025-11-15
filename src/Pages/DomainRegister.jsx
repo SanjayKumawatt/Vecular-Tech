@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import DomainFeaturesFAQ from '../components/DomainFeaturesFAQ'; // Path check kar lena
+import DomainFeaturesFAQ from '../Components/DomainFeaturesFAQ'; // Path check kar lena
 
 // --- 1. Data mein 'href' link add kiya ---
 const tldCards = [
