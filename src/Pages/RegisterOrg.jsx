@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import DomainFeaturesFAQ from '../components/DomainFeaturesFAQ'; // Import the FAQ component
+import DomainFeaturesFAQ from '../Components/DomainFeaturesFAQ'; // Import the FAQ component
 
 const RegisterOrg = () => {
   // .org specific pricing data (based on your pricing page)
