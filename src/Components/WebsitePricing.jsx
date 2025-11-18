@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 
 // --- Pricing Data ---
-// Yahan aap sabhi plans aur unke prices manage kar sakte hain
 const pricingData = [
   {
     name: 'Basic',
@@ -21,31 +20,12 @@ const pricingData = [
       'Daily Backups',
       'LiteSpeed Webserver',
     ],
-    // Pricing details for each cycle
     pricing: {
-      monthly: {
-        price: '₹249',
-        suffix: '/month',
-        oldPrice: null,
-        offer: null,
-        billingNote: 'Billed monthly, renews at ₹249/mo.',
-      },
-      annually: {
-        price: '₹149',
-        suffix: '/month',
-        oldPrice: '₹249',
-        offer: 'Save 40%',
-        billingNote: 'Billed annually, renews at same price.',
-      },
-      triennially: {
-        price: '₹95',
-        suffix: '/month',
-        oldPrice: '₹195',
-        offer: 'Now 50% OFF',
-        billingNote: 'Billed triennially, renews at same price.',
-      },
+      monthly: { price: '₹249', suffix: '/month', oldPrice: null, offer: null },
+      annually: { price: '₹149', suffix: '/month', oldPrice: '₹249', offer: 'Save 40%' },
+      triennially: { price: '₹95', suffix: '/month', oldPrice: '₹195', offer: 'Now 50% OFF' },
     },
-    orderLink: '/order/basic', // Base link
+    orderLink: '/order/basic', // Base link (NO ?cycle=)
   },
   {
     name: 'Plus',
@@ -64,29 +44,11 @@ const pricingData = [
       'LiteSpeed Webserver',
     ],
     pricing: {
-      monthly: {
-        price: '₹499',
-        suffix: '/month',
-        oldPrice: null,
-        offer: null,
-        billingNote: 'Billed monthly, renews at ₹499/mo.',
-      },
-      annually: {
-        price: '₹299',
-        suffix: '/month',
-        oldPrice: '₹499',
-        offer: 'Save 40%',
-        billingNote: 'Billed annually, renews at same price.',
-      },
-      triennially: {
-        price: '₹195',
-        suffix: '/month',
-        oldPrice: '₹395',
-        offer: 'Now 50% OFF',
-        billingNote: 'Billed triennially, renews at same price.',
-      },
+      monthly: { price: '₹499', suffix: '/month', oldPrice: null, offer: null },
+      annually: { price: '₹299', suffix: '/month', oldPrice: '₹499', offer: 'Save 40%' },
+      triennially: { price: '₹195', suffix: '/month', oldPrice: '₹395', offer: 'Now 50% OFF' },
     },
-    orderLink: '/order/plus', // Base link
+    orderLink: '/order/plus', // Base link (NO ?cycle=)
   },
   {
     name: 'Pro',
@@ -105,29 +67,11 @@ const pricingData = [
       'LiteSpeed Webserver',
     ],
     pricing: {
-      monthly: {
-        price: '₹799',
-        suffix: '/month',
-        oldPrice: null,
-        offer: null,
-        billingNote: 'Billed monthly, renews at ₹799/mo.',
-      },
-      annually: {
-        price: '₹499',
-        suffix: '/month',
-        oldPrice: '₹799',
-        offer: 'Save 37%',
-        billingNote: 'Billed annually, renews at same price.',
-      },
-      triennially: {
-        price: '₹295',
-        suffix: '/month',
-        oldPrice: '₹595',
-        offer: 'Now 50% OFF',
-        billingNote: 'Billed triennially, renews at same price.',
-      },
+      monthly: { price: '₹799', suffix: '/month', oldPrice: null, offer: null },
+      annually: { price: '₹499', suffix: '/month', oldPrice: '₹799', offer: 'Save 37%' },
+      triennially: { price: '₹295', suffix: '/month', oldPrice: '₹595', offer: 'Now 50% OFF' },
     },
-    orderLink: '/order/pro', // Base link
+    orderLink: '/order/pro', // Base link (NO ?cycle=)
   },
 ];
 
@@ -149,8 +93,7 @@ const ToggleButton = ({ label, isActive, onClick }) => (
 );
 
 const WebsitePricing = () => {
-  // State to manage billing cycle, default 'triennially' as per image
-  const [billingCycle, setBillingCycle] = useState('triennially'); // 'monthly', 'annually', 'triennially'
+  const [billingCycle, setBillingCycle] = useState('triennially');
 
   return (
     <section className="bg-white py-16 sm:py-24">
@@ -192,7 +135,6 @@ const WebsitePricing = () => {
         {/* --- 3. Pricing Cards Grid --- */}
         <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
           {pricingData.map((plan) => {
-            // Get the correct price details based on the selected cycle
             const currentPrice = plan.pricing[billingCycle];
 
             return (
@@ -202,20 +144,9 @@ const WebsitePricing = () => {
                   ${plan.isPopular ? 'border-sky-500 border-2' : 'border-gray-200'}
                 `}
               >
-                {/* Popular Badge */}
-                {plan.isPopular && (
-                  <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center px-4 py-1 rounded-full text-xs font-semibold tracking-wide bg-sky-600 text-white">
-                      MOST POPULAR
-                    </span>
-                  </div>
-                )}
-
-                {/* Plan Name & Description */}
+                {/* ... (Popular Badge, Plan Name, Price, etc. same) ... */}
                 <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
                 <p className="mt-2 text-base text-gray-600">{plan.description}</p>
-
-                {/* Price */}
                 <div className="mt-6">
                   {currentPrice.offer && (
                     <div className="flex items-center gap-2">
@@ -237,20 +168,17 @@ const WebsitePricing = () => {
                       {currentPrice.suffix}
                     </span>
                   </p>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {currentPrice.billingNote}
-                  </p>
                 </div>
 
-                {/* Order Button (Updated with dynamic link) */}
+                {/* --- Button Link Updated --- */}
                 <Link
-                  to={`${plan.orderLink}?cycle=${billingCycle}`}
+                  to={plan.orderLink} // <-- Ab yahan query parameter nahi hai
                   className="mt-8 w-full inline-flex items-center justify-center rounded-md bg-sky-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-sky-700 transition-colors"
                 >
                   Order Now
                 </Link>
 
-                {/* Features List */}
+                {/* ... (Features list same) ... */}
                 <ul className="mt-8 space-y-3 text-base text-gray-700 flex-grow">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3">

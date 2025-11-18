@@ -31,7 +31,10 @@ import OrderBasic from './Components/OrderBasic'
 import TermsOfService from './Pages/TermsOfService'
 import PrivacyPolicy from './Pages/PrivacyPolicy'
 import RefundPolicy from './Pages/RefundPolicy'
+import Checkout from './Pages/Checkout'
 // import { Contact } from 'lucide-react'
+
+import { CartProvider } from './context/CartContext'
 
 
 const App = () => {
@@ -157,13 +160,19 @@ const App = () => {
       path: "/reset-password",
       element: <ResetPassword />
     },
+    {
+      path: "/checkout",
+      element: <Checkout />
+    },
 
   ])
 
 
   return (
     <div>
-      <RouterProvider router={router}></RouterProvider>
+      <CartProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </CartProvider>
     </div>
   )
 }
